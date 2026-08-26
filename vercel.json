@@ -1,7 +1,6 @@
 {
   "version": 2,
-  "installCommand": "npm --prefix frontend-host install && npm --prefix backend install",
-  "buildCommand": "npm --prefix frontend-host run build",
+  "buildCommand": "cd frontend-host && npm install && npm run build",
   "outputDirectory": "frontend-host/dist",
   "rewrites": [
     {

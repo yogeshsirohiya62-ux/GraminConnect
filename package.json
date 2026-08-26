@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install:all": "npm --prefix frontend-host install && npm --prefix backend install",
-    "build": "npm --prefix frontend-host install && npm --prefix frontend-host run build",
-    "start": "npm --prefix frontend-host start"
+    "build": "cd frontend-host && npm install && npm run build",
+    "start": "cd frontend-host && npm start"
   }
 }
