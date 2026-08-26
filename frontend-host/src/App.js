@@ -9,22 +9,13 @@ import CropDoctorView from './components/CropDoctorView';
 import MarketplaceView from './components/MarketplaceView';
 import EquipmentRentalView from './components/EquipmentRentalView';
 import HelplineDialer from './components/HelplineDialer';
+import DashboardView from './components/DashboardView';
 
-// Dynamically import the federated Remote Dashboard Module
+// Dynamically import the federated Remote Dashboard Module with local DashboardView fallback
 const RemoteDashboard = React.lazy(() => 
   import('dashboard/Dashboard').catch((err) => {
-    console.error("Failed to load Remote Dashboard:", err);
-    return { 
-      default: () => (
-        <div style={{ padding: '30px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '12px', color: '#991b1b', textAlign: 'center' }}>
-          <h3 style={{ margin: '0 0 8px' }}>⚠️ Remote Module Offline</h3>
-          <p style={{ margin: 0, fontSize: '14px' }}>
-            The host shell is running, but the remote micro-frontend on port 3001 could not be reached.
-          </p>
-          <small style={{ display: 'block', marginTop: '10px', color: '#b91c1c' }}>Error: {String(err.message || err)}</small>
-        </div>
-      ) 
-    };
+    console.warn("Module federation remote on 3001 not detected, using integrated DashboardView component.");
+    return { default: DashboardView };
   })
 );
 

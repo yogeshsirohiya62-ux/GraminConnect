@@ -21,7 +21,9 @@ module.exports = {
     ],
   },
   output: {
-    publicPath: 'http://localhost:3000/',
+    publicPath: 'auto',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
   module: {
     rules: [
