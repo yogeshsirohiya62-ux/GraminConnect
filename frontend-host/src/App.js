@@ -11,14 +11,6 @@ import EquipmentRentalView from './components/EquipmentRentalView';
 import HelplineDialer from './components/HelplineDialer';
 import DashboardView from './components/DashboardView';
 
-// Dynamically import the federated Remote Dashboard Module with local DashboardView fallback
-const RemoteDashboard = React.lazy(() => 
-  import('dashboard/Dashboard').catch((err) => {
-    console.warn("Module federation remote on 3001 not detected, using integrated DashboardView component.");
-    return { default: DashboardView };
-  })
-);
-
 const App = () => {
   const { user, logout, isOffline, setOfflineStatus, language, setLanguage } = useStore();
   const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' | 'marketplace' | 'rentals' | 'matchmaker' | 'doctor' | 'schemes' | 'forum' | 'tools'
@@ -231,11 +223,7 @@ const App = () => {
         width: '100%', 
         overflowX: 'hidden' 
       }}>
-        {activeTab === 'dashboard' && (
-          <Suspense fallback={<div style={{ padding: '60px', textAlign: 'center', color: '#64748b' }}>⏳ Loading Rural Intelligence Hub...</div>}>
-            <RemoteDashboard user={user} />
-          </Suspense>
-        )}
+        {activeTab === 'dashboard' && <DashboardView user={user} />}
 
         {activeTab === 'marketplace' && <MarketplaceView />}
         {activeTab === 'rentals' && <EquipmentRentalView />}
